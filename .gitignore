@@ -1,0 +1,20 @@
+# Android/Gradle
+.gradle/
+build/
+**/build/
+local.properties
+
+# IntelliJ/Android Studio
+.idea/
+*.iml
+
+# Keystore/signing
+*.jks
+*.keystore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports/temporary
+_report_extract/
