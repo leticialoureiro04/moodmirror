@@ -1,45 +1,45 @@
-# MoodMirror - Espelho Inteligente de Emocoes e Ambiente
+# MoodMirror - Espelho Inteligente de Emoções e Ambiente
 
-Aplicacao Android academica em Kotlin + Jetpack Compose que combina:
+Aplicação Android académica em Kotlin + Jetpack Compose que combina:
 - CameraX (`Preview` + `ImageAnalysis`)
 - ML Kit Face Detection
-- Sensor de luz (com fallback quando indisponivel)
-- Acelerometro para detetar estabilidade/movimento
+- Sensor de luz (com fallback quando indisponível)
+- Acelerómetro para detetar estabilidade/movimento
 
-Objetivo: analisar rosto + ambiente em tempo real e apresentar feedback simples de bem-estar e concentracao, sem qualquer diagnostico medico.
+Objetivo: analisar rosto + ambiente em tempo real e apresentar feedback simples de bem-estar e concentração, sem qualquer diagnóstico médico.
 
 ## Funcionalidades atuais
 
-- Ecrã inicial com explicacao do projeto.
-- Preview de camera em tempo real.
-- Deteccao de rosto com ML Kit.
-- Estimativa academica de emocao (`Feliz`, `Neutra/o`, `Triste ou baixa energia`, `Cansada/o`).
+- Ecrã inicial com explicação do projeto.
+- Preview de câmara em tempo real.
+- Deteção de rosto com ML Kit.
+- Estimativa académica de emoção (`Feliz`, `Neutra/o`, `Triste ou baixa energia`, `Cansada/o`).
 - Leitura de luminosidade e movimento.
-- Feedback final contextual com qualidade da analise (`Boa`, `Media`, `Fraca`).
-- Guardar registos de emocao/estado no dispositivo.
-- Consultar historico de registos.
-- Resumo simples de padrao de humor (emocao mais frequente).
+- Feedback final contextual com qualidade da análise (`Boa`, `Média`, `Fraca`).
+- Guardar registos de emoção/estado no dispositivo.
+- Consultar histórico de registos.
+- Resumo simples de padrão de humor (emoção mais frequente).
 
 ## Arquitetura (resumo)
 
-- `MainActivity`: ponto de entrada e gestao de navegacao (intro, analise, historico).
-- `MoodViewModel`: estado da UI, logica de combinacao e operacoes de guardar registos.
-- `SensorManagerHelper`: leitura de sensor de luz e acelerometro.
-- `CameraPreview`: integracao CameraX com `Preview` e `ImageAnalysis`.
-- `FaceAnalyzer`: pipeline de deteccao facial com ML Kit.
-- `MoodDatabase` + `MoodRecordDao` + `MoodRepository`: persistencia local com Room.
+- `MainActivity`: ponto de entrada e gestão de navegação (intro, análise, histórico).
+- `MoodViewModel`: estado da UI, lógica de combinação e operações de guardar registos.
+- `SensorManagerHelper`: leitura de sensor de luz e acelerómetro.
+- `CameraPreview`: integração CameraX com `Preview` e `ImageAnalysis`.
+- `FaceAnalyzer`: pipeline de deteção facial com ML Kit.
+- `MoodDatabase` + `MoodRecordDao` + `MoodRepository`: persistência local com Room.
 - `IntroScreen`, `MainScreen`, `HistoryScreen`: UI Compose.
 
 ## Fluxo da app
 
-1. Utilizador abre a app e ve o ecrã inicial.
-2. Clica em "Comecar analise".
-3. App pede permissao da camera.
-4. CameraX inicia preview + analise.
+1. Utilizador abre a app e vê o ecrã inicial.
+2. Clica em "Começar análise".
+3. App pede permissão da câmara.
+4. CameraX inicia preview + análise.
 5. ML Kit deteta rosto e atributos simples (sorriso/olhos).
 6. Sensores atualizam dados de luz e movimento.
-7. ViewModel gera feedback final e qualidade da analise.
-8. Utilizador pode guardar registo e consultar historico.
+7. ViewModel gera feedback final e qualidade da análise.
+8. Utilizador pode guardar registo e consultar histórico.
 
 ## Como executar
 
@@ -47,9 +47,9 @@ Objetivo: analisar rosto + ambiente em tempo real e apresentar feedback simples 
 2. Sincronizar o Gradle.
 3. Garantir Android SDK 34 instalado.
 4. Executar em dispositivo Android (recomendado) ou em emulador.
-5. Conceder permissao de camera.
+5. Conceder permissão de câmara.
 
-## Requisitos tecnicos atendidos
+## Requisitos técnicos atendidos
 
 - Kotlin
 - Jetpack Compose
@@ -58,12 +58,12 @@ Objetivo: analisar rosto + ambiente em tempo real e apresentar feedback simples 
   - `ImageAnalysis`
 - ML Kit Face Detection
 - Sensor de luz com fallback
-- Acelerometro
+- Acelerómetro
 - Ecrã inicial explicativo
-- Aplicacao funcional organizada por camadas (UI, ViewModel, dados locais)
-- Persistencia local e historico de registos para acompanhamento temporal
+- Aplicação funcional organizada por camadas (UI, ViewModel, dados locais)
+- Persistência local e histórico de registos para acompanhamento temporal
 
-## Nota academica
+## Nota académica
 
-Esta aplicacao e para fins academicos e demonstracao tecnica.  
-As inferencias de emocao/fadiga sao aproximacoes simples e nao constituem avaliacao clinica.
+Esta aplicação é para fins académicos e demonstração técnica.  
+As inferências de emoção/fadiga são aproximações simples e não constituem avaliação clínica.
