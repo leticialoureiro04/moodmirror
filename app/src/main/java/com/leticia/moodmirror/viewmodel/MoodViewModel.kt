@@ -38,6 +38,7 @@ data class MoodUiState(
 )
 
 class MoodViewModel(application: Application) : AndroidViewModel(application) {
+    // Repositorio centraliza acesso a persistencia local (Room).
     private val repository = MoodRepository(
         MoodDatabase.getInstance(application).moodRecordDao()
     )
@@ -66,6 +67,7 @@ class MoodViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onLightChanged(lux: Float) {
+        // Faixas simples para traducao de valor numerico em feedback humano.
         val message = when {
             lux < 20f -> "Ambiente com pouca luz"
             lux < 150f -> "Ambiente moderadamente iluminado"
@@ -111,6 +113,7 @@ class MoodViewModel(application: Application) : AndroidViewModel(application) {
         val rightEye = mainFace.rightEyeOpenProbability ?: 1f
         val smile = mainFace.smilingProbability ?: 0.5f
 
+        // Heuristica academica simples para fadiga e emocao (nao clinica).
         val fatigueLikely = leftEye < 0.35f && rightEye < 0.35f
         val emotion = when {
             fatigueLikely -> "Cansada/o"
@@ -132,6 +135,7 @@ class MoodViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun saveCurrentRecord() {
+        // Guarda um snapshot do estado atual para analise temporal posterior.
         val snapshot = _uiState.value
         viewModelScope.launch {
             repository.insert(
@@ -160,6 +164,7 @@ class MoodViewModel(application: Application) : AndroidViewModel(application) {
             val faceReady = current.faceDetected
             val fatigue = current.fatigueLikely
 
+            // Score simples para classificar qualidade global da sessao.
             val score = listOf(faceReady, enoughLight, stable, !fatigue).count { it }
             val quality = when {
                 score >= 4 -> AnalysisQuality.BOA

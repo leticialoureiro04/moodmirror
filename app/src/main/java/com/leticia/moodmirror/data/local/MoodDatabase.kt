@@ -18,6 +18,7 @@ abstract class MoodDatabase : RoomDatabase() {
         private var instance: MoodDatabase? = null
 
         fun getInstance(context: Context): MoodDatabase {
+            // Singleton para evitar multiplas instancias da BD em runtime.
             return instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,

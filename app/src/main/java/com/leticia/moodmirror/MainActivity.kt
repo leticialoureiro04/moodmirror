@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
                 var showHistory by rememberSaveable { mutableStateOf(false) }
 
                 DisposableEffect(Unit) {
+                    // Sensores ativos apenas enquanto a UI desta Activity estiver composable.
                     val sensorHelper = SensorManagerHelper(
                         context = this@MainActivity,
                         onLightSensorAvailable = moodViewModel::onLightSensorAvailable,
@@ -45,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                // Navegacao simples por estado para evitar dependencias extras.
                 if (!started) {
                     IntroScreen(onStartClick = { started = true })
                 } else if (showHistory) {

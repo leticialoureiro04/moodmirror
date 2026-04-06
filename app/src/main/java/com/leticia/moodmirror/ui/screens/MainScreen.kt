@@ -65,6 +65,7 @@ fun MainScreen(
     }
 
     LaunchedEffect(Unit) {
+        // Solicita permissao da camera apenas uma vez ao entrar neste ecrã.
         if (!hasCameraPermission) permissionLauncher.launch(Manifest.permission.CAMERA)
     }
 
@@ -126,6 +127,7 @@ fun MainScreen(
         FeedbackCard(
             title = "Luz",
             message = if (uiState.lightSensorAvailable) {
+                // Em emulador, 0 lux e comum por ausencia de sensor fisico.
                 if (uiState.lightLevelLux <= 0f) {
                     "Sem leitura útil do sensor de luz (comum em emulador)."
                 } else {
@@ -166,6 +168,7 @@ fun MainScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            // Permite guardar rapidamente o estado atual e abrir o historico.
             Button(
                 modifier = Modifier.weight(1f),
                 onClick = onSaveClick

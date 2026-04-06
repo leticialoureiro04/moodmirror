@@ -38,6 +38,7 @@ fun CameraPreview(
     }
 
     DisposableEffect(lifecycleOwner, useFrontCamera) {
+        // A camera e reconfigurada automaticamente ao trocar frontal/traseira.
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
 
         val listener = Runnable {
@@ -51,6 +52,7 @@ fun CameraPreview(
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
+                    // Processa apenas o frame mais recente para manter fluidez.
                     it.setAnalyzer(cameraExecutor, faceAnalyzer)
                 }
 
@@ -72,6 +74,7 @@ fun CameraPreview(
                     else -> throw IllegalStateException("No camera available")
                 }
 
+                // Usa em paralelo Preview + ImageAnalysis (requisito CameraX).
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
                     lifecycleOwner,

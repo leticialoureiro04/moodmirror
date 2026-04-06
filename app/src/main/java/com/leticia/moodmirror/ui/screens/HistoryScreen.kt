@@ -28,6 +28,7 @@ fun HistoryScreen(
     records: List<MoodRecordEntity>,
     onBackClick: () -> Unit
 ) {
+    // Resumo simples para identificar padrao predominante de humor.
     val topEmotion = records
         .groupingBy { it.emotion }
         .eachCount()
@@ -79,6 +80,7 @@ fun HistoryScreen(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                // Lista cronologica inversa: registos mais recentes no topo.
                 items(records, key = { it.id }) { record ->
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Column(modifier = Modifier.padding(12.dp)) {

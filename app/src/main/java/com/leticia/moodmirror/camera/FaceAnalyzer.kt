@@ -13,7 +13,7 @@ class FaceAnalyzer(
 ) : ImageAnalysis.Analyzer {
 
     private val detector: FaceDetector by lazy {
-        // Opcoes leves para analise em tempo real numa demonstracao academica.
+        // Opcoes leves para analise em tempo real numa demonstracao.
         val options = FaceDetectorOptions.Builder()
             .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
             .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
@@ -39,9 +39,11 @@ class FaceAnalyzer(
                 onFacesDetected(faces)
             }
             .addOnFailureListener {
+                // Falha de frame nao deve quebrar o fluxo da analise em tempo real.
                 onFacesDetected(emptyList())
             }
             .addOnCompleteListener {
+                // Libertar sempre o frame para evitar bloquear o pipeline do CameraX.
                 imageProxy.close()
             }
     }
